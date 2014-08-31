@@ -1,0 +1,20 @@
+#!/bin/bash
+set -e
+
+if [[ "" == "$1" ]]; then
+  echo "Supply a path to a go project. (e.g. 'github.com/rtlong/docker-util'). Either mount a directory at /gopath/src/$dir or it will be fetched via 'go get'"
+fi
+
+proj="$1"
+shift
+dir="/gopath/src/$proj"
+
+if [ ! -d "$dir" ]; then
+  go get -v "$proj"
+  cd "$dir"
+else
+  cd "$dir"
+  go get -v
+fi
+
+gox $@
