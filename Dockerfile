@@ -1,4 +1,4 @@
-FROM google/golang
+FROM google/golang:1.3
 
 RUN go get github.com/mitchellh/gox
 RUN gox -build-toolchain
